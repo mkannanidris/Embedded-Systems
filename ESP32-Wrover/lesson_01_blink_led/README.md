@@ -1,53 +1,61 @@
-# Lesson 1: Blinking an LED with ESP32
+# Lesson 1: Blinking an LED with ESP32 (ESP-IDF)
 
-Welcome to the first lesson 
-In this lesson, we learn the most fundamental operation in microcontroller programming: **blinking an LED**.
+Welcome to the first lesson in our ESP-IDF embedded systems series.  
+Here, we learn the most fundamental operation in microcontroller programming: **blinking an LED**.
+
+---
 
 ## 🧠 Objective
 
-- Understand how to control a digital output pin on the ESP32
-- Use `digitalWrite()` and `delay()` to blink the on-board LED
+- Understand how to control a digital output pin using ESP-IDF
+- Use `gpio_set_level()` and `vTaskDelay()` to blink the on-board LED
 
+---
 
-## 📄 Code
+## 📄 Code (`main.c`)
 
-```cpp
-const int LED_PIN = 2; 
+```c
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/gpio.h"
 
-void setup() {
-  pinMode(LED_PIN, OUTPUT); // This is the on-board LED pin on most ESP32 boards
-}
+#define LED_PIN GPIO_NUM_2
 
-void loop() {
-  digitalWrite(LED_PIN, HIGH);
-  delay(500); // LED ON for 0.5 seconds
-  digitalWrite(LED_PIN, LOW);
-  delay(500); // LED OFF for 0.5 seconds
+void app_main(void)
+{
+    gpio_reset_pin(LED_PIN);                      // Reset the GPIO pin to its default state
+    gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT); // Configure the pin as an output
+
+    while (1) {
+        gpio_set_level(LED_PIN, 1);                // Turn LED ON
+        vTaskDelay(pdMS_TO_TICKS(500));            // Delay 500 ms
+        gpio_set_level(LED_PIN, 0);                // Turn LED OFF
+        vTaskDelay(pdMS_TO_TICKS(500));            // Delay 500 ms
+    }
 }
 ```
-
 ## 🔍 Code Explanation
 
-- `const int LED_PIN = 2;`  
-  Declares a constant variable for the LED pin. On most ESP32 boards, pin 2 is connected to the on-board LED.
+- `#include "freertos/FreeRTOS.h"`, `#include "freertos/task.h"`, and `#include "driver/gpio.h"`  
+  These include the required ESP-IDF libraries for task delays and GPIO control.
 
-- `void setup() { ... }`  
-  This function runs once when the ESP32 is powered on or reset.
+- `#define LED_PIN GPIO_NUM_2`  
+  This defines `LED_PIN` as GPIO 2, which is usually connected to the onboard LED on most ESP32 boards.
 
-- `pinMode(LED_PIN, OUTPUT);`  
-  Configures pin 2 to act as an output so it can send voltage to the LED.
+- `gpio_reset_pin(LED_PIN);`  
+  Resets the GPIO pin to its default state. This is required in ESP-IDF v5.0+ before configuring it.
 
-- `void loop() { ... }`  
-  This function runs continuously in a loop. It defines the behavior of your device.
+- `gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);`  
+  Sets the pin mode to output, so the ESP32 can control the LED.
 
-- `digitalWrite(LED_PIN, HIGH);`  
-  Sends a HIGH signal (3.3V) to the LED pin — turns the LED ON.
+- `gpio_set_level(LED_PIN, 1);`  
+  Sends a HIGH signal (3.3V) to the LED pin — turns the LED **ON**.
 
-- `delay(500);`  
-  Waits for 500 milliseconds (0.5 seconds) with the LED on.
+- `vTaskDelay(pdMS_TO_TICKS(500));`  
+  Pauses execution for 500 milliseconds. The `pdMS_TO_TICKS()` macro converts milliseconds to FreeRTOS ticks.
 
-- `digitalWrite(LED_PIN, LOW);`  
-  Sends a LOW signal (0V) to the LED pin — turns the LED OFF.
+- `gpio_set_level(LED_PIN, 0);`  
+  Sends a LOW signal (0V) to the LED pin — turns the LED **OFF**.
 
-- `delay(500);`  
-  Waits for another 500 milliseconds with the LED off before repeating the loop.
+- `while (1) { ... }`  
+  Creates an infinite loop that continuously blinks the LED.
