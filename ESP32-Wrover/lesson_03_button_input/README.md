@@ -1,55 +1,76 @@
-# Lesson 3: Button Input to Control LED
+# Lesson 3: Button Input to Control an LED (ESP-IDF)
 
-Welcome to Lesson 3  
-In this lesson, we connect a push-button to the ESP32 and use it to control an LED.  
-We’ll read the state of the button and turn the LED on or off depending on whether the button is pressed.
+In this lesson, you’ll learn how to use a digital input (a button) to control a digital output (an LED) using the ESP-IDF framework.
 
 ---
 
 ## 🧠 Objective
 
-- Learn how to read digital input from a button
-- Use `digitalRead()` to make decisions
-- Control an output (LED) based on input state
+- Read input from a push button using `gpio_get_level()`
+- Control an output (LED) in response to that input
+- Understand GPIO configuration for input and output
+- Introduce polling with `vTaskDelay()` to prevent CPU overload
+
+---
+
+## 🔌 Hardware Setup
+
+| Component | GPIO |
+|----------|------|
+| Button   | 0    |
+| LED      | 2    |
+
+- Connect one side of the button to **GPIO 0** and the other side to **GND**
+- Use the on-board LED connected to **GPIO 2**
+
+> ⚠️ No external pull-up needed on GPIO 0 — it has an internal pull-up on most ESP32 boards.
 
 ---
 
 ## 📄 Code
 
-```cpp
-const int BUTTON_PIN = 0;  // Connect button to GPIO 0
-const int LED_PIN = 2;     // On-board LED on GPIO 2
+```c
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/gpio.h"
 
-void setup() {
-  pinMode(BUTTON_PIN, INPUT);    // Set button pin as input
-  pinMode(LED_PIN, OUTPUT);      // Set LED pin as output
-}
+#define BUTTON_PIN GPIO_NUM_0   // Button connected to GPIO 0
+#define LED_PIN    GPIO_NUM_2   // On-board LED on GPIO 2
 
-void loop() {
-  int buttonState = digitalRead(BUTTON_PIN);  // Read the button state (HIGH or LOW)
+void app_main(void) {
+    // Reset and configure pins
+    gpio_reset_pin(BUTTON_PIN);
+    gpio_set_direction(BUTTON_PIN, GPIO_MODE_INPUT);
 
-  if (buttonState == HIGH) {
-    digitalWrite(LED_PIN, HIGH);  // Turn LED on when button is pressed
-  } else {
-    digitalWrite(LED_PIN, LOW);   // Turn LED off when button is released
-  }
+    gpio_reset_pin(LED_PIN);
+    gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
+
+    while (1) {
+        int button_state = gpio_get_level(BUTTON_PIN);  // Read the button state
+
+        if (button_state == 1) {
+            gpio_set_level(LED_PIN, 1);  // Turn LED ON if button is pressed
+        } else {
+            gpio_set_level(LED_PIN, 0);  // Turn LED OFF if not pressed
+        }
+
+        vTaskDelay(pdMS_TO_TICKS(10));  // Small delay to avoid CPU overload
+    }
 }
 ```
-## 🔍 Code Explanation
+## 📝 Code Concepts
 
-- `const int BUTTON_PIN = 0;`  
-  Sets GPIO 0 as the input pin connected to the button. This is typically the boot button on most ESP32 boards.
+- `gpio_reset_pin(pin)`  
+  Resets the specified GPIO pin to its default state. This ensures a clean setup before configuration.
 
-- `const int LED_PIN = 2;`  
-  Sets GPIO 2 as the output pin connected to the on-board LED.
+- `gpio_set_direction(pin, mode)`  
+  Sets the GPIO pin to behave either as an input (`GPIO_MODE_INPUT`) or output (`GPIO_MODE_OUTPUT`).
 
-- `void setup()`  
-  This function runs once at startup:
-  - `pinMode(BUTTON_PIN, INPUT);` sets the button pin as input.
-  - `pinMode(LED_PIN, OUTPUT);` sets the LED pin as output.
+- `gpio_get_level(pin)`  
+  Reads the current logic level of a GPIO pin. Returns `1` (HIGH) if voltage is detected, or `0` (LOW) if grounded.
 
-- `void loop()`  
-  This function runs continuously:
-  - `digitalRead(BUTTON_PIN)` reads the current state of the button.
-  - If the button is pressed (`HIGH`), the LED is turned on.
-  - If the button is not pressed (`LOW`), the LED is turned off.
+- `gpio_set_level(pin, value)`  
+  Sets the output level of a GPIO pin. Use `1` to set HIGH (turn LED ON), or `0` for LOW (turn LED OFF).
+
+- `vTaskDelay(pdMS_TO_TICKS(ms))`  
+  Introduces a delay in the task loop without blocking other system tasks. Converts milliseconds to FreeRTOS ticks.
