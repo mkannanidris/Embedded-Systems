@@ -54,7 +54,15 @@ Inside each folder:
 - (optional) wiring diagrams and demo GIFs  
 
 ---
+## 📌 Board Pinout Reference
 
+To help you identify available GPIO pins for each lesson, refer to the Freenove ESP32-WROVER board pinout diagram below:
+
+![Freenove ESP32-WROVER Pinout](https://github.com/Freenove/Freenove_ESP32_WROVER_Board/raw/main/ESP32_Pinout_V3.0.png)
+
+> Source: [Freenove GitHub Repository](https://github.com/Freenove/Freenove_ESP32_WROVER_Board)
+
+---
 ## 🚀 Let's Build Real Embedded Skills
 
 This is more than just a blink demo — this is a full **learning path** for becoming confident in embedded programming with the ESP32.
