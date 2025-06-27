@@ -18,7 +18,7 @@ Each lesson builds on the last, starting with basic GPIO and growing into advanc
 | 6 | 💡 PWM and Dimming an LED | `ledc_timer_config()`, `ledc_channel_config()`, `ledc_set_duty()` | Available |
 | 7 | 🔊 Controlling a Buzzer | PWM tones with `ledc`, sound frequency generation | Available |
 | 8 | 📡 UART Serial Communication | `uart_driver_install()`, `uart_write_bytes()`, `uart_read_bytes()` | Available |
-| 9 | 🧵 Intro to FreeRTOS on ESP32 | `xTaskCreate()`, task scheduling, `vTaskDelay()`, multitasking | Pending |
+| 9 | 🧵 Intro to FreeRTOS on ESP32 | `xTaskCreate()`, task scheduling, `vTaskDelay()`, multitasking | Available |
 | 10 | 🌡️ Reading a Temperature Sensor | ADC or digital GPIO input for LM35/DHT11 with timing | On Hold |
 | 11 | 🧰 Using I2C: OLED Display | `i2c_param_config()`, `i2c_master_write()`, OLED init + draw | On Hold |
 | 12 | 🔌 Using SPI: External Devices | `spi_bus_initialize()`, `spi_device_transmit()`, SPI config | On Hold |
