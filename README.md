@@ -23,9 +23,9 @@ Each lesson builds on the last, starting with basic GPIO and growing into advanc
 | 11 | 🧰 Using I2C: OLED Display | `i2c_param_config()`, `i2c_master_write()`, OLED init + draw | On Hold |
 | 12 | 🔌 Using SPI: External Devices | `spi_bus_initialize()`, `spi_device_transmit()`, SPI config | On Hold |
 | 13 | 🕹️ Multi-Input System Integration | Buttons, sensors, display; logic design and state machines | On Hold |
-| 14 | 📶 Wi-Fi Basics: Connecting to a Network | `esp_wifi_init()`, `esp_wifi_connect()`, TCP/IP stack basics |
-| 15 | 🌐 Hosting a Web Page on ESP32 | `esp_http_server.h`, serving HTML, controlling GPIO via HTTP | On Hold |
-| 16 | 🔒 Web Authentication | Basic login/auth in ESP-IDF HTTP server |
+| 14 | 📶 Wi-Fi Basics: Connecting to a Network | `esp_wifi_init()`, `esp_wifi_connect()`, TCP/IP stack basics | Available |
+| 15 | 🌐 Hosting a Web Page on ESP32 | `esp_http_server.h`, serving HTML, controlling GPIO via HTTP | Pending |
+| 16 | 🔒 Web Authentication | Basic login/auth in ESP-IDF HTTP server | On Hold |
 | 17 | 📲 Sending Data to the Cloud | `esp_http_client.h`, JSON format, REST API integration | On Hold |
 | 18 | 💬 ESP-NOW Peer-to-Peer Communication | `esp_now_init()`, secure send/receive, MAC pairing | On Hold |
 | 19 | 🧠 BLE: Bluetooth Low Energy | `esp_gatts_register_callback()`, services and characteristics | On Hold |

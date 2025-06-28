@@ -1,5 +1,6 @@
 {
     "idf.pythonInstallPath": "/usr/bin/python3",
     "idf.espIdfPath": "/Users/mkidris/esp/v5.4.1/esp-idf",
-    "idf.toolsPath": "/Users/mkidris/.espressif"
+    "idf.toolsPath": "/Users/mkidris/.espressif",
+    "idf.port": "/dev/tty.usbserial-1130"
 }
