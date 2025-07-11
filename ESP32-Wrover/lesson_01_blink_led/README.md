@@ -12,6 +12,13 @@ Here, we learn the most fundamental operation in microcontroller programming: **
 
 ---
 
+## 🔌 Circuit
+
+![](Circuit_lesson_01.png)
+
+
+---
+
 ## 📄 Code (`main.c`)
 
 ```c
