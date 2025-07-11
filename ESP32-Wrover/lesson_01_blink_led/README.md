@@ -14,8 +14,7 @@ Here, we learn the most fundamental operation in microcontroller programming: **
 
 ## 🔌 Circuit
 
-![](Circuit_lesson_01.png)
-
+<img src="Circuit_lesson_01.png" style="width:40%; height:auto;">
 
 ---
 
