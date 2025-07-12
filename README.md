@@ -19,8 +19,8 @@ Each lesson builds on the last, starting with basic GPIO and growing into advanc
 | 7 | 🔊 Controlling a Buzzer | PWM tones with `ledc`, sound frequency generation | Available |
 | 8 | 📡 UART Serial Communication | `uart_driver_install()`, `uart_write_bytes()`, `uart_read_bytes()` | Available |
 | 9 | 🧵 Intro to FreeRTOS on ESP32 | `xTaskCreate()`, task scheduling, `vTaskDelay()`, multitasking | Available |
-| 10 | 🌡️ Reading a Temperature Sensor | ADC or digital GPIO input for LM35/DHT11 with timing | Pending |
-| 11 | 🧰 Using I2C: OLED Display | `i2c_param_config()`, `i2c_master_write()`, OLED init + draw | On Hold |
+| 10 | 🌡️ Reading a Temperature Sensor | ADC or digital GPIO input for LM35/DHT11 with timing | Available |
+| 11 | 🧰 Using I2C: LCD Display (1602A) | `i2c_param_config()`, `i2c_master_write()`, LCD init + print | Pending |
 | 12 | 🔌 Using SPI: External Devices | `spi_bus_initialize()`, `spi_device_transmit()`, SPI config | On Hold |
 | 13 | 🕹️ Multi-Input System Integration | Buttons, sensors, display; logic design and state machines | On Hold |
 | 14 | 📶 Wi-Fi Basics: Connecting to a Network | `esp_wifi_init()`, `esp_wifi_connect()`, TCP/IP stack basics | Available |
